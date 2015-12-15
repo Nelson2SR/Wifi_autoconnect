@@ -63,15 +63,16 @@ class BasePostRequest extends BaseRequest {
 		 */
 		String regIdEncrypted = SharedPrefHelper.getString(mContext.get(), Constants.REGISTRATION_ID);
 		String regSecretEncrypted = SharedPrefHelper.getString(mContext.get(), Constants.REGISTRATION_SECRET);
+		String registrationId = "";
+		String registrationSecret = "";
 		/*
 		 * If either the reg ID (encrypted) string or the reg Secret (encrypted) string is empty
-		 * It will mean user is not authenticated previously, so no need to continue
+		 * It will mean user is not authenticated previously, so no need to put in
 		 */
-		if (regSecretEncrypted.trim().length() == 0 || regSecretEncrypted.trim().length() == 0) {
-			return headers;	// we return an empty header
+		if (regSecretEncrypted.trim().length() > 0 && regIdEncrypted.trim().length() > 0) {
+			registrationId = Utils.decrypt(Utils.getDeviceId(mContext.get()), regIdEncrypted);
+			registrationSecret = Utils.decrypt(Utils.getDeviceId(mContext.get()), regSecretEncrypted);
 		}
-		String registrationId = Utils.decrypt(Utils.getDeviceId(mContext.get()), regIdEncrypted);
-		String registrationSecret = Utils.decrypt(Utils.getDeviceId(mContext.get()), regSecretEncrypted);
 		Date curDate = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
 		format.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
