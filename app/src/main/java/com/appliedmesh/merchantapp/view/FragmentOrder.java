@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * Created by dongbin on 2015/6/4.
@@ -70,7 +71,8 @@ public class FragmentOrder extends android.support.v4.app.Fragment implements Vi
                 "fonts/Clockopia.ttf");
         TextView tvordertime = (TextView) mRootView.findViewById(R.id.tv_order_time);
         tvordertime.setTypeface(fontFace);
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE d MMM HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE d MMM HH:mm:ss'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+16"));
         tvordertime.setText(sdf.format(mOrder.getOrderTime()));
         TextView tvStartTime = (TextView)mRootView.findViewById(R.id.tv_start_time);
         tvStartTime.setTypeface(fontFace);
