@@ -2,10 +2,19 @@ package com.appliedmesh.merchantapp.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HurlStack;
+
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
 
 public class Volley {
 	private static RequestQueue mQueue;
@@ -29,7 +38,8 @@ public class Volley {
 	}
 
 	public static void init(Context context) {
-		mQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
+		mQueue = com.android.volley.toolbox.Volley.newRequestQueue(context.getApplicationContext(), new HurlStack(null, newSslSocketFactory()));
+//		mQueue = com.android.volley.toolbox.Volley.newRequestQueue(context);
 	}
 
 	public static RequestQueue getRequestQueue() {
@@ -78,4 +88,24 @@ public class Volley {
 			mQueue.cancelAll(tag);
 		}
 	}
+
+	private static SSLSocketFactory newSslSocketFactory() {
+		TrustManager tm[] = {new PubKeyManager()};
+		assert (null != tm);
+
+		SSLContext context = null;
+		try {
+			context = SSLContext.getInstance("TLS");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		assert (null != context);
+		try {
+			context.init(null, tm, null);
+		} catch (KeyManagementException e) {
+			e.printStackTrace();
+		}
+		return context.getSocketFactory();
+	}
+
 }
