@@ -129,8 +129,6 @@ public class ActivityLoginOption  extends AppCompatActivity {
                                     SharedPrefHelper.set(ActivityLoginOption.this, Constants.REGISTRATION_ID, regIdEncrypted);
                                     SharedPrefHelper.set(ActivityLoginOption.this, Constants.REGISTRATION_SECRET, regSecretEncrypted);
 
-									SharedPrefHelper.set(ActivityLoginOption.this, Constants.NAME_TOKEN, regIdEncrypted);
-
 									SharedPrefHelper.set(ActivityLoginOption.this, Constants.NAME_USERNAME, userID);
 									Toast.makeText(ActivityLoginOption.this, "Login Successful", Toast.LENGTH_LONG).show();
 									finish();

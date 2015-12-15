@@ -119,13 +119,8 @@ public class ActivitySignUp extends AppCompatActivity {
 						SignUpRequest req = new SignUpRequest(ActivitySignUp.this, username,password1, ServerConfigs.MERCHANT_CODE, ServerConfigs.STORE_CODE,userID,new JsonObjectRequestCallback() {
 				            @Override
 				            public void onRequestSuccess(JSONObject value) {
-				                try {
-				                    SharedPrefHelper.set(ActivitySignUp.this, Constants.NAME_TOKEN, value.getString(ServerConfigs.KEY_TOKEN));
-				                    SharedPrefHelper.set(ActivitySignUp.this, Constants.NAME_USERNAME, userID);
-				                    showDialog(userID);
-				                }catch (JSONException e){
-				                    e.printStackTrace();
-				                }
+								SharedPrefHelper.set(ActivitySignUp.this, Constants.NAME_USERNAME, userID);
+								showDialog(userID);
 				            }
 
 				            @Override

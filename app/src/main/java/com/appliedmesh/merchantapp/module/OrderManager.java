@@ -314,19 +314,6 @@ public class OrderManager {
     }
 
     public void getNewOrder(){
-        /*
-         * Check to see that we are still logged in.
-         * If we the preference store with the name "token" is empty, it will mean we are NOT
-         * logged in.
-         */
-        String token = SharedPrefHelper.getString(mCtx, Constants.NAME_TOKEN);
-
-        if (TextUtils.isEmpty(token)) {
-            Intent i = new Intent(Constants.ACTION_TOKEN_INVALID);
-            mCtx.sendBroadcast(i);
-            return;
-        }
-
         GetNewOrdersRequest req = new GetNewOrdersRequest(mCtx, new JsonObjectRequestCallback() {
             @Override
             public void onRequestSuccess(JSONObject value) {

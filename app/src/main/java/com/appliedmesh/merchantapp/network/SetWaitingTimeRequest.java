@@ -33,7 +33,7 @@ public class SetWaitingTimeRequest extends BasePostRequest {
 					if (reply.has(ServerConfigs.RESPONSE_STATUS) && reply.getString(ServerConfigs.RESPONSE_STATUS).equals(ServerConfigs.RESPONSE_STATUS_SUCCESS)) {
 						callback.onRequestSuccess(reply.getJSONObject(ServerConfigs.RESPONSE_DATA));
                     }else if (reply.has(ServerConfigs.RESPONSE_MESSAGE) && reply.getString(ServerConfigs.RESPONSE_MESSAGE).contains(ServerConfigs.RESPONSE_TOKEN_INVALID)){
-						SharedPrefHelper.set(context,Constants.NAME_TOKEN, "");
+						SharedPrefHelper.set(context,Constants.REGISTRATION_ID, "");
                         Intent i = new Intent(Constants.ACTION_TOKEN_INVALID);
                         context.sendBroadcast(i);
 					}else

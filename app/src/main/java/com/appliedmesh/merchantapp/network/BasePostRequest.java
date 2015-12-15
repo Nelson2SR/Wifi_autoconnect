@@ -1,8 +1,10 @@
 package com.appliedmesh.merchantapp.network;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.text.TextUtils;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response.ErrorListener;
@@ -61,6 +63,13 @@ class BasePostRequest extends BaseRequest {
 		 */
 		String regIdEncrypted = SharedPrefHelper.getString(mContext.get(), Constants.REGISTRATION_ID);
 		String regSecretEncrypted = SharedPrefHelper.getString(mContext.get(), Constants.REGISTRATION_SECRET);
+		/*
+		 * If either the reg ID (encrypted) string or the reg Secret (encrypted) string is empty
+		 * It will mean user is not authenticated previously, so no need to continue
+		 */
+		if (regSecretEncrypted.trim().length() == 0 || regSecretEncrypted.trim().length() == 0) {
+			return headers;	// we return an empty header
+		}
 		String registrationId = Utils.decrypt(Utils.getDeviceId(mContext.get()), regIdEncrypted);
 		String registrationSecret = Utils.decrypt(Utils.getDeviceId(mContext.get()), regSecretEncrypted);
 		Date curDate = new Date();
@@ -77,6 +86,24 @@ class BasePostRequest extends BaseRequest {
 		headers.put("Date", date_);
 
 		return headers;
+	}
+
+	public void assertLoggedIn() {
+		String regIdEncrypted = SharedPrefHelper.getString(mContext.get(), Constants.REGISTRATION_ID);
+		/*
+		 * If we cannot find any reg. ID and reg. secret, it may mean we are either not authenticated
+		 * or has been locked out due to another login session elsewhere
+		 */
+		if (regIdEncrypted == null || regIdEncrypted.trim() == "") {
+			Intent i = new Intent(Constants.ACTION_TOKEN_INVALID);
+			mContext.get().sendBroadcast(i);
+		}
+			return;
+	}
+
+	protected void logout() {
+		SharedPrefHelper.set(mContext.get(), Constants.REGISTRATION_ID, "");
+		SharedPrefHelper.set(mContext.get(), Constants.REGISTRATION_SECRET, "");
 	}
 
 	protected int getVersion() {

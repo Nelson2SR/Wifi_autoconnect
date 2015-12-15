@@ -269,11 +269,9 @@ public class Sidebar extends Fragment implements OnClickListener {
 		}
 	}
 	public  boolean isUserLogin() {
-		if (TextUtils.isEmpty(getUserName()) || TextUtils.isEmpty(getToken())) {
-			return false;
-		}
-		return true;
+		return (SharedPrefHelper.getString(getActivity(), Constants.REGISTRATION_ID).trim().length() > 0);
 	}
+
 	public void setUserName( String username) {
 		SharedPrefHelper.set(getActivity(), Constants.NAME_USERNAME, username);
 	}
@@ -281,15 +279,11 @@ public class Sidebar extends Fragment implements OnClickListener {
 		String username = SharedPrefHelper.getString(getActivity(), Constants.NAME_USERNAME);
 		return username;
 	}
-	public void setToken( String token) {
-		SharedPrefHelper.set(getActivity(), Constants.NAME_TOKEN, token);
-	}
 	public String getToken() {
-		String token = SharedPrefHelper.getString(getActivity(), Constants.NAME_TOKEN);
-		if (TextUtils.isEmpty(token))
-			return "";
-		else
-			return token;
+		/*
+		 * Not used for now; was only use for previous POC app.
+		 */
+		return "";
 	}
 
 }

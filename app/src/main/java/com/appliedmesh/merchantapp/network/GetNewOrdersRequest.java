@@ -2,6 +2,9 @@ package com.appliedmesh.merchantapp.network;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response.ErrorListener;
@@ -33,7 +36,7 @@ public class GetNewOrdersRequest extends BasePostRequest {
 					if (reply.has(ServerConfigs.RESPONSE_STATUS) && reply.getString(ServerConfigs.RESPONSE_STATUS).equals(ServerConfigs.RESPONSE_STATUS_SUCCESS)) {
 						callback.onRequestSuccess(reply.getJSONObject(ServerConfigs.RESPONSE_DATA));
 					}else if (reply.has(ServerConfigs.RESPONSE_MESSAGE) && reply.getString(ServerConfigs.RESPONSE_MESSAGE).contains(ServerConfigs.RESPONSE_TOKEN_INVALID)){
-						SharedPrefHelper.set(context,Constants.NAME_TOKEN, "");
+						SharedPrefHelper.set(context,Constants.REGISTRATION_ID, "");
                         Intent i = new Intent(Constants.ACTION_TOKEN_INVALID);
                         context.sendBroadcast(i);
 					}else
@@ -44,16 +47,29 @@ public class GetNewOrdersRequest extends BasePostRequest {
 				}
 			}
 		}, new ErrorListener() {
-
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				Logger.e("error", error.getMessage());
-				callback.onRequestFailed(error.getMessage());
+				try {
+					String error_json_string = new String(error.networkResponse.data);
+					JSONObject error_json = new JSONObject(error_json_string);
+					String error_message = error_json.getString("message");
 
+					if (error_message.equalsIgnoreCase("authentication failed.")) {
+						SharedPrefHelper.set(context, Constants.REGISTRATION_ID, "");
+						SharedPrefHelper.set(context, Constants.REGISTRATION_SECRET, "");
+
+						Intent i = new Intent(Constants.ACTION_TOKEN_INVALID);
+						context.sendBroadcast(i);
+					}
+					else {
+						callback.onRequestFailed(error_message);
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
-
 
 	@Override
 	protected Map<String, String> getParams() throws AuthFailureError {

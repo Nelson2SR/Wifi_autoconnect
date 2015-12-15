@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements Sidebar.Navigatio
     			break;
             case 4:
     			if (mSideBar.isUserLogin()) {
-    				mSideBar.setToken( "");
     				mSideBar.setUserName("");
     				mSideBar.updateLoginStatus();
     			} else {

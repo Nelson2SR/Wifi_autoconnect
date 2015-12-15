@@ -19,7 +19,6 @@ public class Constants {
     public static final String NAME_MERCHANT_ID = "merchant_id";
     public static final String NAME_SECURITY_KEY = "security_key";
     public static final String NAME_SERVER_URL = "server_url";
-    public static final String NAME_TOKEN = "token";
     public static final String REGISTRATION_ID = "registration_id";
     public static final String REGISTRATION_SECRET = "registration_secret";
     public static final String NAME_USERNAME="USER_NAME";
