@@ -230,6 +230,10 @@ public class Sidebar extends Fragment implements OnClickListener {
             selectItem(3);
             break;
         case R.id.tvLogin:
+			if (tvLogin.getText().toString().trim().equalsIgnoreCase("logout")) {
+				SharedPrefHelper.set(getActivity(), Constants.REGISTRATION_ID, "");
+				SharedPrefHelper.set(getActivity(), Constants.REGISTRATION_ID, "");
+			}
             selectItem(4);
             break;
 		default:

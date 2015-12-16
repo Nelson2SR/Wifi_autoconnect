@@ -77,7 +77,13 @@ public class Order implements Serializable{
         if (mEstimateTime >= 0) {
             mStatus = STATUS_CONFIRMED;
         }else {
-            long duration = System.currentTimeMillis() - mOrderTime.getTime();
+            /*
+             * Wen Yen added a 16 * 3600 seconds to the mOrderTime in order to make it Singpapore.
+             * We have no idea why we need to add 16 instead of 8 hours.
+             * This change will only affect this block, i.e. we did not fix the root of the problem
+             */
+//            long duration = System.currentTimeMillis() - mOrderTime.getTime();
+            long duration = System.currentTimeMillis() - (mOrderTime.getTime() + (8 * 3600 * 1000));
             if (duration >= TIME_DURATION_TO_VERY_URGENT) {
                 mStatus = STATUS_VERY_URGENT;
             }else if (duration >= TIME_DURATION_TO_URGENT) {
