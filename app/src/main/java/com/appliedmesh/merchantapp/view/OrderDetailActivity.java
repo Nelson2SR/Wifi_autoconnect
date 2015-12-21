@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.*;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -48,9 +49,11 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
 
         mViewPager = (ViewPager) findViewById(R.id.orderpager);
         mOrderPagerAdapater = new OrderPagerAdapater(getSupportFragmentManager());
+
         mViewPager.setAdapter(mOrderPagerAdapater);
         int oldestOrder = OrderManager.getInstance().getOldestPendingIndex();
         int orderindex = getIntent().getIntExtra("orderindex", oldestOrder>0?oldestOrder:0);
+        mViewPager.setOffscreenPageLimit(10);
         mViewPager.setCurrentItem(orderindex);
         mViewPager.addOnPageChangeListener(this);
 
@@ -80,6 +83,7 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
     }
 
     public class OrderPagerAdapater extends FragmentStatePagerAdapter{
+        private int prev_size = -1;
         public OrderPagerAdapater(FragmentManager fm){
             super(fm);
         }
@@ -137,6 +141,12 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
         return true;
     }
 
+    /**
+     * This will execute after the along with the displaying of the OrderDetail View to display
+     * the Pending XX(NN) text at the top right corner of the view
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.action_pending);
@@ -165,6 +175,13 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
         return super.onPrepareOptionsMenu(menu);
     }
 
+    /**
+     * This will execute after the Pending NN(MM) text at the top right of the ViewAdapter is clicked
+     *
+     * It will display the Order List page
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

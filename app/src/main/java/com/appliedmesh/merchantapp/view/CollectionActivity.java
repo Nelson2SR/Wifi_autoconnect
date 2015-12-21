@@ -87,8 +87,6 @@ public class CollectionActivity extends AppCompatActivity implements View.OnTouc
         }
         mData.addFirst(map);
         mAdapter.notifyDataSetChanged();
-        FileUtil.writeToSDCardFile("html", "data.txt", queue + "\n", true);
-        FileUtil.writeToSDCardFile("html", "data.txt", map.get("queue_time")+"\n",true);
     }
 
     private class QueueAdapter extends BaseAdapter {

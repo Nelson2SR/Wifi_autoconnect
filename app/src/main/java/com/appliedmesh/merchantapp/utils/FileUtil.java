@@ -79,11 +79,6 @@ public class FileUtil {
         }
     }
 
-    public static File writeToSDCardFile(String directory, String fileName,
-                                         String content, boolean isAppend) {
-        return writeToSDCardFile(directory, fileName, content, "", isAppend);
-    }
-
     private static void listFiles(String directory) {
 
         File file = new File(Environment.getExternalStorageDirectory()
@@ -94,84 +89,6 @@ public class FileUtil {
                 //TODO list file here
             }
         }
-    }
-    /**
-     *
-     * @param directory
-     *            (you don't need to begin with
-     *            Environment.getExternalStorageDirectory()+File.separator)
-     * @param fileName
-     * @param content
-     * @param encoding
-     *            (UTF-8...)
-     * @param isAppend
-     *            : Context.MODE_APPEND
-     * @return
-     */
-    public static File writeToSDCardFile(String directory, String fileName,
-                                         String content, String encoding, boolean isAppend) {
-        // mobile SD card path +path
-        File file = null;
-        OutputStream os = null;
-        try {
-            if (!createFile(directory)) {
-                return file;
-            }
-            file = new File(Environment.getExternalStorageDirectory()
-                    + File.separator + directory + File.separator + fileName);
-            os = new FileOutputStream(file, isAppend);
-            if (encoding.equals("")) {
-                os.write(content.getBytes());
-            } else {
-                os.write(content.getBytes(encoding));
-            }
-            os.flush();
-        } catch (IOException e) {
-            Log.e("FileUtil", "writeToSDCardFile:" + e.getMessage());
-        } finally {
-            try {
-                if(os != null){
-                    os.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return file;
-    }
-
-    /**
-     * write data from inputstream to SDCard
-     */
-    public File writeToSDCardFromInput(String directory, String fileName,
-                                       InputStream input) {
-        File file = null;
-        OutputStream os = null;
-        try {
-            if (createFile(directory)) {
-                return file;
-            }
-            file = new File(Environment.getExternalStorageDirectory()
-                    + File.separator + directory + fileName);
-            os = new FileOutputStream(file);
-            byte[] data = new byte[bufferd];
-            int length = -1;
-            while ((length = input.read(data)) != -1) {
-                os.write(data, 0, length);
-            }
-            // clear cache
-            os.flush();
-        } catch (Exception e) {
-            Log.e("FileUtil", "" + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            try {
-                os.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return file;
     }
 
     /**

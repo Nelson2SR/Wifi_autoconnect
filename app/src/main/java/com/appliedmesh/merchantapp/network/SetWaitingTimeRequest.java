@@ -48,8 +48,19 @@ public class SetWaitingTimeRequest extends BasePostRequest {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				Logger.e("error", error.getMessage());
-				callback.onRequestFailed(error.getMessage());
+				try {
+					String error_json_string = new String(error.networkResponse.data);
+					JSONObject error_json = new JSONObject(error_json_string);
+					String error_message = error_json.getString("message");
+
+					if (error_message != null) {
+
+					}
+					callback.onRequestFailed(error_message);
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		this.context = context;

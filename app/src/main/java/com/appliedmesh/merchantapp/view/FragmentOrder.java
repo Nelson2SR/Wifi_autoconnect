@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -186,8 +187,19 @@ public class FragmentOrder extends android.support.v4.app.Fragment implements Vi
                         @Override
                         public void onRequestFailed(String errorMessage) {
                             Logger.e(TAG, errorMessage);
+
+                            if (errorMessage == null) {
+                                /*
+                                 * We don't know what to do with this!
+                                 */
+                            }
+//                            else if (errorMessage.equalsIgnoreCase("update order error")) {
+                                /*
+                                 * We don't do anything, so that the order will still be outstanding
+                                 */
+//                            }
                             //check if this order is confrimed already
-                            if (errorMessage.contains("has already been processed before")) {
+                            else  if (errorMessage.contains("has already been processed before")) {
                                 Toast.makeText(getActivity(), "Order has been processed", Toast.LENGTH_SHORT).show();
                                 mOrder.setEstimateTime(0);
                                 updateOrderStatus();
@@ -196,7 +208,10 @@ public class FragmentOrder extends android.support.v4.app.Fragment implements Vi
                                 getActivity().sendBroadcast(intent);
                                 mInSetWaitingTime = false;
                             }else {
-                                Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                                if (getActivity() != null) {
+                                    Log.e(getTag(), errorMessage);
+                                    Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                     });
