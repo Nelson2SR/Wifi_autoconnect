@@ -66,6 +66,8 @@ public class GetNewOrdersRequest extends BasePostRequest {
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		});

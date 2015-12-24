@@ -10,6 +10,7 @@ public class Constants {
     public static final String ACTION_ORDER_DETAIL = "com.merchantapp.action.orderdetail";
     public static final String ACTION_ORDER_CONFIRMED = "com.merchantapp.action.orderconfirmed";
     public static final String ACTION_ORDER_COMING = "com.merchantapp.action.ordercoming";
+    public static final String ACTION_ORDER_CONFIRM_ERROR = "com.merchantapp.action.orderconfirmerror";
     public static final String ACTION_INPUT_QUEUE = "com.merchantapp.action.inputqueue";
     public static final String ACTION_TEST = "com.merchantapp.action.test";
     public static final String ACTION_TOKEN_INVALID = "com.appliedmesh.merchantapp.action.TOKEN_INVALID";

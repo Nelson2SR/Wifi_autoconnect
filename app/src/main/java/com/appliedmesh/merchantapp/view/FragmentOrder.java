@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -193,11 +195,6 @@ public class FragmentOrder extends android.support.v4.app.Fragment implements Vi
                                  * We don't know what to do with this!
                                  */
                             }
-//                            else if (errorMessage.equalsIgnoreCase("update order error")) {
-                                /*
-                                 * We don't do anything, so that the order will still be outstanding
-                                 */
-//                            }
                             //check if this order is confrimed already
                             else  if (errorMessage.contains("has already been processed before")) {
                                 Toast.makeText(getActivity(), "Order has been processed", Toast.LENGTH_SHORT).show();
@@ -208,16 +205,18 @@ public class FragmentOrder extends android.support.v4.app.Fragment implements Vi
                                 getActivity().sendBroadcast(intent);
                                 mInSetWaitingTime = false;
                             }else {
-                                if (getActivity() != null) {
-                                    Log.e(getTag(), errorMessage);
-                                    Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
-                                }
+                                Intent intent = new Intent(Constants.ACTION_ORDER_CONFIRM_ERROR);
+                                intent.putExtra("orderid", mOrder.getId());
+                                intent.putExtra("error_msg", errorMessage);
+                                getActivity().sendBroadcast(intent);
+                                mInSetWaitingTime = false;
                             }
                         }
                     });
                     Volley.getInstance().addToRequestQueue(req);
                     mInSetWaitingTime = true;
                 }
+                break;
             }
         }
     }

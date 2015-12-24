@@ -1,5 +1,6 @@
 package com.appliedmesh.merchantapp.view;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,8 @@ import android.util.Log;
 import android.view.*;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.Toast;
+
 import com.appliedmesh.merchantapp.module.*;
 import com.appliedmesh.merchantapp.R;
 
@@ -29,8 +32,9 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
     private final static long ALARM_DURATION=10*1000;
     private final static int MSG_ALARM = 1;
     private ViewPager mViewPager;
+    private BeepManager mBeepManagerNewOrder;
+    private BeepManager mBeepManagerAlarm;
     private OrderPagerAdapater mOrderPagerAdapater;
-    private BeepManager mBeepManager;
     private Timer mTimer;
     private TimerTask mTimerTask;
     private AlphaAnimation mAnimation;
@@ -62,7 +66,8 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
         //getSupportActionBar().setTitle(String.format(title, order.getId()));
         getSupportActionBar().setTitle(order.getId());
 
-        mBeepManager = new BeepManager(this);
+        mBeepManagerNewOrder = new BeepManager(this);
+        mBeepManagerAlarm = new BeepManager(this);
         mTimer = new Timer(true);
         mTimerTask = new AlarmTask();
         mTimer.schedule(mTimerTask, 0, ALARM_DURATION);
@@ -169,9 +174,12 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
                     + ")";
             item.setTitle(title);
             item.setVisible(true);
+
         }else{
-            item.setVisible(false);
+//            item.setVisible(false);
+            item.setTitle("");
         }
+
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -215,14 +223,29 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
                     mViewPager.setCurrentItem(++index, true);
                 }
 
-            }else if (intent.getAction().equals(Constants.ACTION_ORDER_COMING)) {
+            } else if (intent.getAction().equals(Constants.ACTION_ORDER_COMING)) {
                 invalidateOptionsMenu();
                 mOrderPagerAdapater.notifyDataSetChanged();
-                mBeepManager.playBeepSoundAndVibrate(BeepManager.TYPE_NEW_ORDER);
+//                mBeepManagerNewOrder.playBeepSoundAndVibrate(BeepManager.TYPE_NEW_ORDER);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                            mBeepManagerAlarm.playBeepSoundAndVibrate(BeepManager.TYPE_NEW_ORDER);
+                    }
+                }).start();
+
                 int currentitem = mViewPager.getCurrentItem();
                 if (mReachEnd) {
                     mViewPager.setCurrentItem(currentitem+1, true);
                 }
+            }
+            else if (intent.getAction().equals(Constants.ACTION_ORDER_CONFIRM_ERROR)) {
+                String error_message = intent.getStringExtra("error_message");
+                /*
+                 * Do Error Stuff
+                 */
+                Toast.makeText(context, error_message, Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -276,8 +299,17 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
                         }
                         int oldest = OrderManager.getInstance().getOldestPendingIndex();
                         if (oldest >= 0
-                                && OrderManager.getInstance().getOrders().get(oldest).getStatus() == Order.STATUS_VERY_URGENT) {
-                            activity.mBeepManager.playBeepSoundAndVibrate(BeepManager.TYPE_ALARM);
+                                && OrderManager.getInstance().getOrders().get(oldest).getStatus() == Order.STATUS_VERY_URGENT
+                        ) {
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Activity activity = mActivity.get();
+                                    if (activity != null) {
+                                        mActivity.get().mBeepManagerAlarm.playBeepSoundAndVibrate(BeepManager.TYPE_ALARM);
+                                    }
+                                }
+                            }).start();
                         }
                         break;
                     default:
