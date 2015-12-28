@@ -27,19 +27,16 @@ public final class PubKeyManager implements X509TrustManager {
     public void checkServerTrusted(X509Certificate[] chain, String authType)
             throws CertificateException {
 
-        assert (chain != null);
         if (chain == null) {
             throw new IllegalArgumentException(
                     "checkServerTrusted: X509Certificate array is null");
         }
 
-        assert (chain.length > 0);
         if (!(chain.length > 0)) {
             throw new IllegalArgumentException(
                     "checkServerTrusted: X509Certificate is empty");
         }
 
-        assert (null != authType && authType.equalsIgnoreCase("ECDHE_RSA"));
         if (!(null != authType && authType.equalsIgnoreCase("ECDHE_RSA"))) {
             throw new CertificateException(
                     "checkServerTrusted: AuthType is not ECDHE_RSA");

@@ -135,7 +135,7 @@ public class CollectionActivity extends AppCompatActivity implements View.OnTouc
                 tv_queue.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.collection_list_item_size));
                 tv_time.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.collection_list_item_size));
             }
-            if (i%2 == 1) {
+            if (i%2 != 0) {
                 view.setBackgroundColor(getResources().getColor(R.color.order_item_bg));
             }else{
                 view.setBackgroundColor(getResources().getColor(R.color.white));

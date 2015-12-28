@@ -315,6 +315,15 @@ public class OrderManager {
     }
 
     public void getNewOrder(){
+        /*
+         * We will only get new orders when we are logged in.
+         * So, if we are not logged in, we will exit this function
+         */
+        String userid = SharedPrefHelper.getString(mCtx, Constants.REGISTRATION_ID);
+        if (userid == null || userid.equals("")) {
+            return;
+        }
+
         GetNewOrdersRequest req = new GetNewOrdersRequest(mCtx, new JsonObjectRequestCallback() {
             @Override
             public void onRequestSuccess(JSONObject value) {

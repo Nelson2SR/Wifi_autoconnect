@@ -242,17 +242,8 @@ public class Sidebar extends Fragment implements OnClickListener {
 	}
 	
 	public void updateHostName() {
-		File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dev.mypointofpurchase.com");
-		if(file.exists()){
-			tvDev.setVisibility(View.VISIBLE);
-		}else{
-			tvDev.setVisibility(View.GONE);
-		}
-		if (getUrl().equals(ServerConfigs.BASEURL_MYPOINT)) {
-			tvDev.setText("Change to DEV");
-		} else {
-			tvDev.setText("Change to FNB");
-		}
+		tvDev.setVisibility(View.GONE);
+		return;
 	}
 	public String getUrl(){
 		String url = SharedPrefHelper.getString(getActivity(), Constants.NAME_SERVER_URL);
