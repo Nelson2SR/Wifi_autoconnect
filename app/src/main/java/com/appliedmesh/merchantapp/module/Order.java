@@ -23,8 +23,8 @@ public class Order implements Serializable{
     public static final int STATUS_NOT_URGENT = 1;
     public static final int STATUS_URGENT = 2;
     public static final int STATUS_VERY_URGENT = 3;
-    public static final int TIME_DURATION_TO_URGENT = 30*1000;
-    public static final int TIME_DURATION_TO_VERY_URGENT = 60*1000;
+    public static final int TIME_DURATION_TO_URGENT = 3 * 60 * 1000;  // 3 minutes
+    public static final int TIME_DURATION_TO_VERY_URGENT = 10 * 60*1000; // 10 minutes
     private String mId;
     private Timestamp mOrderTime;
     private Timestamp mStartTime;
