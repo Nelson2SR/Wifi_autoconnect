@@ -9,7 +9,6 @@ import com.appliedmesh.merchantapp.utils.MD5;
  */
 public class RemoteServer {
     private static final String TAG = "RemoteServer";
-    public static final String HOST = "http://am-merchant.dugeit.net/";
     public static final String PROTOCOL_GET_RECEIPT_URL = "merchant-get-receipt-url";
     public static final String RESPONSE_STATUS = "status";
     public static final String RESPONSE_RECEIPTS_URL = "receipt-url";
@@ -28,26 +27,5 @@ public class RemoteServer {
             sRS = new RemoteServer(context);
         }
         return sRS;
-    }
-
-    public String genRequestReceiptUrl(String receiptNum) {
-        if (receiptNum == null || receiptNum.equals(""))
-            return null;
-
-        String url = null;
-        try {
-            String merchant_id = mSharedPreferences.getString(Constants.NAME_MERCHANT_ID, "");
-            String security_key = mSharedPreferences.getString(Constants.NAME_SECURITY_KEY, "");
-            url = HOST + PROTOCOL_GET_RECEIPT_URL
-                    + "/" + merchant_id
-                    + "/" + MD5.getMD5(security_key + merchant_id)
-                    + "/" + System.currentTimeMillis()/1000
-                    + "/" + MD5.getMD5(security_key + System.currentTimeMillis()/1000)
-                    + "/" + receiptNum
-                    + "/" + MD5.getMD5(security_key + receiptNum);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return url;
     }
 }
