@@ -385,12 +385,7 @@ public class OrderManager {
             if (isWorkingTIme()) {
                 getNewOrder();
             }else{
-                if (url.equals(ServerConfigs.DEVURL_MYPOINT)) {
-                    getNewOrder();
-                }
-                else {
-                    Logger.d(TAG,"off work now");
-                }
+                Logger.d(TAG,"off work now");
             }
         }
     }

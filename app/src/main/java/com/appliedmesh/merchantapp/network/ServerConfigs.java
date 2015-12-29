@@ -11,8 +11,6 @@ public class ServerConfigs {
 	//host urls
 	public static final String BASEURL_MYPOINT = "https://merchant.mypointofpurchase.com/";
 //	public static final String BASEURL_MYPOINT = "http://54.173.51.71:9090/";
-	public static final String DEVURL_MYPOINT = "https://merchant.mypointofpurchase.com/";
-
 	//api
 	public static final String API_LOGIN = "api/v1/login";
 	public static final String API_SET_WAITING_TIME = "api/v1/ack_order";

@@ -128,10 +128,6 @@ public class MainActivity extends AppCompatActivity implements Sidebar.Navigatio
                 Intent newint = new Intent(MainActivity.this, CollectionActivity.class);
                 startActivity(newint);
                 break;
-            case 3://Dev
-    			changeUrl();
-    			mSideBar.updateHostName();
-    			break;
             case 4:
     			if (mSideBar.isUserLogin()) {
     				mSideBar.setUserName("");
@@ -150,14 +146,6 @@ public class MainActivity extends AppCompatActivity implements Sidebar.Navigatio
         Intent i = new Intent(this, ActivityLoginOption.class);
         startActivity(i);
     }
-
-	private void changeUrl(){
-		if(mSideBar.getUrl().equals(ServerConfigs.BASEURL_MYPOINT)){
-			mSideBar.setUrl( ServerConfigs.DEVURL_MYPOINT);
-		}else{
-			mSideBar.setUrl( ServerConfigs.BASEURL_MYPOINT);
-		}
-	}
 
     @Override
     public void onBackPressed() {
