@@ -26,5 +26,5 @@ public class Constants {
     public static final String NAME_OPENING_HOUR="opening_hour";
     public static final String NAME_CLOSING_HOUR="closing_hour";
     public static final String DEFAULT_OPENING_HOUR="08:00";
-    public static final String DEFAULT_CLOSING_HOUR="17:00";
+    public static final String DEFAULT_CLOSING_HOUR="23:59";
 }

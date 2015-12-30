@@ -16,6 +16,7 @@ import com.appliedmesh.merchantapp.module.Constants;
 import com.appliedmesh.merchantapp.utils.Logger;
 import com.appliedmesh.merchantapp.utils.SharedPrefHelper;
 import com.appliedmesh.merchantapp.utils.Utilities;
+import com.appliedmesh.merchantapp.utils.Utils;
 
 public class LoginRequest extends BasePostRequest {
 	Context context;
@@ -51,7 +52,7 @@ public class LoginRequest extends BasePostRequest {
 		});
 		this.context = context;
 		this.mUserID = userID;
-		this.mPassword = password;
+		this.mPassword = Utils.bytesToHex(Utils.getSha512(password));
 		this.mMerchantcode=merchantcode;
 	}
 
