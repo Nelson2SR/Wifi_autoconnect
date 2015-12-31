@@ -231,7 +231,7 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
                     @Override
                     public void run() {
 
-                            mBeepManagerAlarm.playBeepSoundAndVibrate(BeepManager.TYPE_NEW_ORDER);
+                            mBeepManagerNewOrder.playBeepSoundAndVibrate(BeepManager.TYPE_NEW_ORDER);
                     }
                 }).start();
 
