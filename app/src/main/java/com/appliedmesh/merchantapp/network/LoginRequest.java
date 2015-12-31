@@ -52,8 +52,8 @@ public class LoginRequest extends BasePostRequest {
 		});
 		this.context = context;
 		this.mUserID = userID;
-//		this.mPassword = Utils.bytesToHex(Utils.getSha512(password));
-		this.mPassword = password;
+		this.mPassword = Utils.bytesToHex(Utils.getSha512(password));
+//		this.mPassword = password;
 		this.mMerchantcode=merchantcode;
 	}
 
