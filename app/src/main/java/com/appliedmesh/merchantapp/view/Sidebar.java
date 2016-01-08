@@ -2,6 +2,7 @@ package com.appliedmesh.merchantapp.view;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -11,16 +12,24 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.appliedmesh.merchantapp.R;
 import com.appliedmesh.merchantapp.module.Constants;
+import com.appliedmesh.merchantapp.network.JsonObjectRequestCallback;
+import com.appliedmesh.merchantapp.network.LogoutRequest;
 import com.appliedmesh.merchantapp.network.ServerConfigs;
 import com.appliedmesh.merchantapp.utils.SharedPrefHelper;
+import com.appliedmesh.merchantapp.utils.Volley;
+
+import org.json.JSONObject;
 
 import java.io.File;
 
@@ -231,9 +240,23 @@ public class Sidebar extends Fragment implements OnClickListener {
             break;
         case R.id.tvLogin:
 			if (tvLogin.getText().toString().trim().equalsIgnoreCase("logout")) {
-				SharedPrefHelper.set(getActivity(), Constants.REGISTRATION_ID, "");
-				SharedPrefHelper.set(getActivity(), Constants.REGISTRATION_ID, "");
+				LogoutRequest req = new LogoutRequest(getActivity(), new JsonObjectRequestCallback() {
+
+					@Override
+					public void onRequestSuccess(JSONObject value) {
+						Toast.makeText(getActivity(), "Logout Successful", Toast.LENGTH_LONG).show();
+						SharedPrefHelper.set(getActivity(), Constants.REGISTRATION_ID, "");
+						SharedPrefHelper.set(getActivity(), Constants.REGISTRATION_SECRET, "");
+					}
+
+					@Override
+					public void onRequestFailed(String errorMessage) {
+						Toast.makeText(getActivity(), "Unable to Logout", Toast.LENGTH_SHORT).show();
+					}
+				});
+				Volley.getInstance().addToRequestQueue(req);
 			}
+
             selectItem(4);
             break;
 		default:

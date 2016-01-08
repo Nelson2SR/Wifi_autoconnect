@@ -14,6 +14,7 @@ public class ServerConfigs {
 //	public static final String BASEURL_MYPOINT = "http://54.173.51.71:9090/";
 	//api
 	public static final String API_LOGIN = "api/v1/login";
+	public static final String API_LOGOUT = "api/v1/logout";
 	public static final String API_SET_WAITING_TIME = "api/v1/ack_order";
 	public static final String API_GET_NEW_ORDERS = "api/v1/get_order_list";
 	public static final String API_SIGNUP = "Api/signup/";
