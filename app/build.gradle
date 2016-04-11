@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.appliedmesh.merchantapp.okg"
+        applicationId "com.appliedmesh.merchantapp"
         minSdkVersion 17
         targetSdkVersion 17
     }

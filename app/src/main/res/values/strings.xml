@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OKG Merchant</string>
+    <string name="app_name">OTH Merchant</string>
     <string name="enter_receipt">Enter Receipt No.</string>
     <string name="flashlight">Flashlight</string>
     <string name="load_image">Load Image</string>

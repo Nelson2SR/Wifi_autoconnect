@@ -62,8 +62,8 @@ public class ActivityLoginOption  extends AppCompatActivity {
 		setContentView(R.layout.a_login_option);
 		
 
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setHomeButtonEnabled(false);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 
 		etEmail = (EditText) findViewById(R.id.etEmail);
 		etPassword = (EditText) findViewById(R.id.etPassword);
