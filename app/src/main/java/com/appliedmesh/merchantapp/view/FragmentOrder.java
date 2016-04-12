@@ -67,6 +67,9 @@ public class FragmentOrder extends android.support.v4.app.Fragment implements Vi
     }
 
     private void initView() {
+        Log.d("FRAGMENT ORDER", "Debug order => "+mOrder.getItems());
+
+
         if(mRootView == null)
             return;
         //set digital clock typeface

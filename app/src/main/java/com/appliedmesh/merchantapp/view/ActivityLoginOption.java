@@ -1,36 +1,34 @@
 package com.appliedmesh.merchantapp.view;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.appliedmesh.merchantapp.module.Constants;
-import com.appliedmesh.merchantapp.utils.Volley;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.appliedmesh.merchantapp.R;
-import com.appliedmesh.merchantapp.network.JsonObjectRequestCallback;
-import com.appliedmesh.merchantapp.network.LoginRequest;
-import com.appliedmesh.merchantapp.network.ServerConfigs;
-import com.appliedmesh.merchantapp.utils.SharedPrefHelper;
-import com.appliedmesh.merchantapp.utils.Utils;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.appliedmesh.merchantapp.R;
+import com.appliedmesh.merchantapp.module.Constants;
+import com.appliedmesh.merchantapp.network.JsonObjectRequestCallback;
+import com.appliedmesh.merchantapp.network.LoginRequest;
+import com.appliedmesh.merchantapp.network.ServerConfigs;
+import com.appliedmesh.merchantapp.utils.SharedPrefHelper;
+import com.appliedmesh.merchantapp.utils.Utils;
+import com.appliedmesh.merchantapp.utils.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 

@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response.ErrorListener;
@@ -47,7 +48,6 @@ public class LoginRequest extends BasePostRequest {
 			public void onErrorResponse(VolleyError error) {
 				Logger.e("error", error.getMessage());
                 callback.onRequestFailed(error.getMessage());
-
 			}
 		});
 		this.context = context;

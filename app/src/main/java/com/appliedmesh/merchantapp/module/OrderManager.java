@@ -3,6 +3,7 @@ package com.appliedmesh.merchantapp.module;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.appliedmesh.merchantapp.network.GetNewOrdersRequest;
 import com.appliedmesh.merchantapp.network.JsonObjectRequestCallback;
@@ -223,23 +224,23 @@ public class OrderManager {
     private String parseName(JSONObject product) {
         try {
             StringBuilder name = new StringBuilder();
-            if (product.has(Order.PRODUCT_OPTION_HOT_ICE)) {
-                String hotcold = product.getString(Order.PRODUCT_OPTION_HOT_ICE);
-                if (hotcold.equalsIgnoreCase(mProductTable.get("Hot"))) {
-                    name.append("<font color='#ff0000'>");
-                    name.append(product.getString(Order.PRODUCT_OPTION_HOT_ICE));
-                }else{
-                    name.append("<font color='#0000ff'>");
-                    name.append(product.getString(Order.PRODUCT_OPTION_HOT_ICE));
+                if (product.has(Order.PRODUCT_OPTION_HOT_ICE)) {
+                    String hotcold = product.getString(Order.PRODUCT_OPTION_HOT_ICE);
+                    if (hotcold.equalsIgnoreCase(mProductTable.get("Hot"))) {
+                        name.append("<font color='#ff0000'>");
+                        name.append(product.getString(Order.PRODUCT_OPTION_HOT_ICE));
+                        name.append("</font>");
+                        name.append(" ");
+                    }else if(hotcold.equalsIgnoreCase(mProductTable.get("Cold"))){
+                        name.append("<font color='#0000ff'>");
+                        name.append(product.getString(Order.PRODUCT_OPTION_HOT_ICE));
+                        name.append("</font>");
+                        name.append(" ");
+                    }
                 }
-                name.append("</font>");
-            }
-
-//                    String productName = product.getString("code");
-                    String shortcode =  product.getString("shortcode");
-
-                    name.append(" ");
-                    name.append(shortcode);
+//                String productName = product.getString("code");
+                String shortcode =  product.getString("shortcode");
+                name.append(shortcode);
 
             if (product.has(Order.PRODUCT_OPTION_THICKNESS)) {
                 name.append(product.getString(Order.PRODUCT_OPTION_THICKNESS));
