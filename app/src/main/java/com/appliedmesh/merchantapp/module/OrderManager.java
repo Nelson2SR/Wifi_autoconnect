@@ -21,8 +21,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -224,6 +226,7 @@ public class OrderManager {
     private String parseName(JSONObject product) {
         try {
             StringBuilder name = new StringBuilder();
+                Log.d("ORDER MANAGER", "Debug products => "+product);
                 if (product.has(Order.PRODUCT_OPTION_HOT_ICE)) {
                     String hotcold = product.getString(Order.PRODUCT_OPTION_HOT_ICE);
                     if (hotcold.equalsIgnoreCase(mProductTable.get("Hot"))) {
@@ -242,6 +245,18 @@ public class OrderManager {
                 String shortcode =  product.getString("shortcode");
                 name.append(shortcode);
 
+            Iterator<String> keys = product.keys();
+            List<String> skipKeys = Arrays.asList("plus", "price", "count", "code", "shortcode", Order.PRODUCT_OPTION_HOT_ICE);
+            while (keys.hasNext()) {
+                String key = keys.next();
+                String value = product.getString(key);
+                if (skipKeys.contains(key) || value.equals("") || value.equals("null")) {
+                    continue;
+                }
+                name.append(" " + value);
+            }
+
+            /*
             if (product.has(Order.PRODUCT_OPTION_THICKNESS)) {
                 name.append(product.getString(Order.PRODUCT_OPTION_THICKNESS));
             }
@@ -261,6 +276,8 @@ public class OrderManager {
                 name.append(" ");
                 name.append(product.getString(Order.PRODUCT_OPTION_OTHER));
             }
+            */
+
             return name.toString();
         } catch (Exception e) {
             e.printStackTrace();

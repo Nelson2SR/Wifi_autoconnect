@@ -11,7 +11,7 @@ public class ServerConfigs {
 	//host urls
 //	public static final String BASEURL_MYPOINT = "https://merchant.mypointofpurchase.com/"; //PRODUCTION
 //	public static final String BASEURL_MYPOINT = "https://merchantstg.mypointofpurchase.com/"; //STAGING
-	public static final String BASEURL_MYPOINT = "http://54.173.51.71:9090/"; //DEVELOPMENT
+	public static final String BASEURL_MYPOINT = "http://52.200.199.157:9090/"; //DEVELOPMENT
 	//api
 	public static final String API_LOGIN = "api/v1/login";
 	public static final String API_LOGOUT = "api/v1/logout";
