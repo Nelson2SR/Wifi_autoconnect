@@ -241,6 +241,8 @@ public class Sidebar extends Fragment implements OnClickListener {
 						Toast.makeText(getActivity(), "Logout Successful", Toast.LENGTH_LONG).show();
 						SharedPrefHelper.set(getActivity(), Constants.REGISTRATION_ID, "");
 						SharedPrefHelper.set(getActivity(), Constants.REGISTRATION_SECRET, "");
+						SharedPrefHelper.set(getActivity(), Constants.MERCHANT_NAME, "");
+						SharedPrefHelper.set(getActivity(), Constants.MERCHANT_OUTLET, "");
 						Intent intent = new Intent(getActivity(), ActivityLoginOption.class);
 						startActivity(intent);
 					}

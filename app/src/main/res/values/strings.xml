@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OTH Merchant</string>
+    <string name="app_name">Merchant App</string>
     <string name="enter_receipt">Enter Receipt No.</string>
     <string name="flashlight">Flashlight</string>
     <string name="load_image">Load Image</string>
@@ -42,7 +42,7 @@
     <string name="no_order">No Order</string>
     <string name="login">Login</string>
     <string name="logout">LogOut</string>
-    <string name="fastrack_login">Merchant  Login</string>
+    <string name="fastrack_login">Merchant Login</string>
     <string name="guest_checkout">Guest Checkout</string>
     <string name="please_sign_in_with_your_poc_account">Please sign in with your merchant account</string>
     <string name="enter_your_email_below">Enter your email below</string>

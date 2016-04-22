@@ -30,6 +30,7 @@ import com.appliedmesh.merchantapp.network.JsonObjectRequestCallback;
 import com.appliedmesh.merchantapp.network.ServerConfigs;
 import com.appliedmesh.merchantapp.utils.Logger;
 import com.appliedmesh.merchantapp.utils.SharedPrefHelper;
+import com.appliedmesh.merchantapp.utils.Utils;
 import com.appliedmesh.merchantapp.utils.Volley;
 
 import org.json.JSONException;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements Sidebar.Navigatio
         setContentView(R.layout.main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
 
         if (OrderManager.getInstance().getPendingNum() > 0) {
             Intent newint = new Intent(MainActivity.this, OrderDetailActivity.class);
@@ -92,6 +94,9 @@ public class MainActivity extends AppCompatActivity implements Sidebar.Navigatio
 
     @Override
     protected void onResume() {
+        if(!Utils.isEmpty(SharedPrefHelper.getString(this, Constants.MERCHANT_NAME))){
+            getSupportActionBar().setTitle(SharedPrefHelper.getString(this, Constants.MERCHANT_NAME) +" | "+ SharedPrefHelper.getString(this, Constants.MERCHANT_OUTLET));
+        }
     	mSideBar.updateHostName();
     	mSideBar.updateLoginStatus();
 //        checkUpdate();
