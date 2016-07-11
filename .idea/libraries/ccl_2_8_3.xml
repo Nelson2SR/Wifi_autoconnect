@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="ccl-2.8.3">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.android.libraries.cast.companionlibrary/ccl/2.8.3/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.android.libraries.cast.companionlibrary/ccl/2.8.3/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.android.libraries.cast.companionlibrary/ccl/2.8.3/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.libraries.cast.companionlibrary/ccl/2.8.3/f244add39689b627f753e3eabcfd6c7ed195a85f/ccl-2.8.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

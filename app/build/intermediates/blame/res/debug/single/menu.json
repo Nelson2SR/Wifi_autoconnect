@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\src\\main\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_order_detail.xml",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\src\\main\\res\\menu\\menu_order_detail.xml"
+    },
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\menu\\cast_player_menu.xml",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\exploded-aar\\com.google.android.libraries.cast.companionlibrary\\ccl\\2.8.3\\res\\menu\\cast_player_menu.xml"
+    }
+]

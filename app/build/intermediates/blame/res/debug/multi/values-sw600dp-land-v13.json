@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\values-sw600dp-land-v13\\values-sw600dp-land-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 50,
+                    "endOffset": 101
+                },
+                "from": {
+                    "file": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\exploded-aar\\com.google.android.libraries.cast.companionlibrary\\ccl\\2.8.3\\res\\values-sw600dp-land\\values-sw600dp-land.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 203,
+                        "endColumn": 50,
+                        "endOffset": 249
+                    }
+                }
+            }
+        ]
+    }
+]

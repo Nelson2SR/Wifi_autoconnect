@@ -67,4 +67,9 @@
     <string name="update">Update</string>
     <string name="download_progress">Download progress</string>
     <string name="app_update"> Application Update</string>
+    <string name="app_id">61FBA12A</string>
+    <string name="namespace">urn:x-cast:com.appliedmesh.fastrack.dbs.oldteahut</string>
+    <string name="media_route_menu_title">Play on&#8230;</string>
+    <string name="order_send_to_display">SEND TO DISPLAY</string>
+
 </resources>

@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\raw\\alarm_beep.ogg",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\src\\main\\res\\raw\\alarm_beep.ogg"
+    },
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\raw\\beep.ogg",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\src\\main\\res\\raw\\beep.ogg"
+    },
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\raw\\ring3.ogg",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\src\\main\\res\\raw\\ring3.ogg"
+    }
+]

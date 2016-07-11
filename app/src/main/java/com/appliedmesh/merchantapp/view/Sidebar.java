@@ -87,6 +87,8 @@ public class Sidebar extends Fragment implements OnClickListener {
 		return v;
 	}
 
+
+
 	private String getVersionName() {
 		try {
 			PackageManager manager = getActivity().getPackageManager();

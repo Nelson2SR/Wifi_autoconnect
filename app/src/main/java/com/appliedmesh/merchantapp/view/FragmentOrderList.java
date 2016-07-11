@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ public class FragmentOrderList extends Fragment implements AdapterView.OnItemCli
     OrderAdapter mAdapter;
     TextView mTvNoItem;
     List<Map<String,Object>> mData;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class FragmentOrderList extends Fragment implements AdapterView.OnItemCli
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Log.d(getActivity().getLocalClassName(),"test");
         Intent intent = new Intent(Constants.ACTION_ORDER_DETAIL);
         intent.putExtra("orderindex", i);
         getActivity().sendBroadcast(intent);

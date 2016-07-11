@@ -11,6 +11,7 @@ public class Constants {
     public static final String ACTION_ORDER_CONFIRMED = "com.merchantapp.action.orderconfirmed";
     public static final String ACTION_ORDER_COMING = "com.merchantapp.action.ordercoming";
     public static final String ACTION_ORDER_CONFIRM_ERROR = "com.merchantapp.action.orderconfirmerror";
+    public static final String ACTION_DISPLAY_QUEUE = "com.merchantapp.action.displayqueue";
     public static final String ACTION_INPUT_QUEUE = "com.merchantapp.action.inputqueue";
     public static final String ACTION_TEST = "com.merchantapp.action.test";
     public static final String ACTION_TOKEN_INVALID = "com.appliedmesh.merchantapp.action.TOKEN_INVALID";
@@ -29,4 +30,7 @@ public class Constants {
     public static final String DEFAULT_CLOSING_HOUR="23:59";
     public static final String MERCHANT_NAME="merchant_name";
     public static final String MERCHANT_OUTLET="merchant_outlet";
+
+    public static final int REQUEST_CODE_SEND_TO_DISPLAY = 0;
+    public static final int REQUEST_CODE_LOGIN = 1;
 }

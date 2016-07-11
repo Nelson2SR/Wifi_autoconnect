@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v11\\ic_stat_content_remove.png",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\exploded-aar\\com.google.android.libraries.cast.companionlibrary\\ccl\\2.8.3\\res\\drawable-hdpi-v11\\ic_stat_content_remove.png"
+    },
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v11\\ic_stat_action_notification.png",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\exploded-aar\\com.google.android.libraries.cast.companionlibrary\\ccl\\2.8.3\\res\\drawable-hdpi-v11\\ic_stat_action_notification.png"
+    },
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v11\\ic_stat_action_democast.png",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\exploded-aar\\com.google.android.libraries.cast.companionlibrary\\ccl\\2.8.3\\res\\drawable-hdpi-v11\\ic_stat_action_democast.png"
+    }
+]

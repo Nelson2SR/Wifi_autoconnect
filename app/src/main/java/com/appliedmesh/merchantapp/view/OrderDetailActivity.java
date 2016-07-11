@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -41,6 +42,11 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
     private final OrderDetailHandler mHandler = new OrderDetailHandler(this);
     private FragmentOrder mCurrentFragment;
     private boolean mReachEnd = false;
+    private final static String TAG = OrderDetailActivity.class.getSimpleName();
+    public String queue = "";
+    private String toDisplay = "";
+    public boolean mDisplay = false;
+    private int display = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +91,8 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
         registerReceiver(mMainReceiver, filterOrderConfimed);
         IntentFilter filterOrderComing = new IntentFilter(Constants.ACTION_ORDER_COMING);
         registerReceiver(mMainReceiver, filterOrderComing);
+        IntentFilter filterQueueDisplay = new IntentFilter(Constants.ACTION_DISPLAY_QUEUE);
+        registerReceiver(mMainReceiver, filterQueueDisplay);
     }
 
     public class OrderPagerAdapater extends FragmentStatePagerAdapter{
@@ -212,6 +220,7 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Constants.ACTION_ORDER_CONFIRMED)) {
+                Log.d(TAG,"Order Confirmed");
                 invalidateOptionsMenu();
                 //switch to next page
                 int oldest = OrderManager.getInstance().getOldestPendingIndex();
@@ -224,6 +233,7 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
                 }
 
             } else if (intent.getAction().equals(Constants.ACTION_ORDER_COMING)) {
+                Log.d(TAG,"Order is Coming");
                 invalidateOptionsMenu();
                 mOrderPagerAdapater.notifyDataSetChanged();
 //                mBeepManagerNewOrder.playBeepSoundAndVibrate(BeepManager.TYPE_NEW_ORDER);
@@ -241,14 +251,32 @@ public class OrderDetailActivity extends AppCompatActivity implements ViewPager.
                 }
             }
             else if (intent.getAction().equals(Constants.ACTION_ORDER_CONFIRM_ERROR)) {
+                Log.d(TAG,"Order is error");
                 String error_message = intent.getStringExtra("error_message");
                 /*
                  * Do Error Stuff
                  */
                 Toast.makeText(context, error_message, Toast.LENGTH_SHORT).show();
             }
+            else if (intent.getAction().equals(Constants.ACTION_DISPLAY_QUEUE)){
+                Log.d(TAG,"Receive Queue Display Order");
+                Order order = (Order) intent.getSerializableExtra("order");
+                queue = String.valueOf(order.getQueueNum());
+                Log.d(TAG,"queue number:"+ queue);
+                mDisplay = true;
+                display = 1;
+                toDisplay = "yes";
+                SharedPreferences preferences = context.getSharedPreferences("queueSave",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("queue",queue);
+                editor.putString("display",toDisplay);
+                editor.commit();
+
+            }
         }
     };
+
+
 
     @Override
     protected void onResume() {

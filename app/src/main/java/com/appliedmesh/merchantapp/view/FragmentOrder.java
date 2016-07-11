@@ -1,5 +1,6 @@
 package com.appliedmesh.merchantapp.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ public class FragmentOrder extends android.support.v4.app.Fragment implements Vi
     private int mOrderStatus = Order.STATUS_UNKNOWN;
     private LayoutInflater mInflater;
     private boolean mInSetWaitingTime = false;
+    TextView mTvSend;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -120,6 +122,10 @@ public class FragmentOrder extends android.support.v4.app.Fragment implements Vi
 
         //update background color
         updateOrderStatus();
+
+        mTvSend = (TextView) mRootView.findViewById(R.id.tv_send_to_display);
+        mTvSend.setOnClickListener(this);
+
     }
 
     private long getEstimateMillis(){
@@ -157,8 +163,10 @@ public class FragmentOrder extends android.support.v4.app.Fragment implements Vi
         tvCollectTime.setText(sdf2.format(et));
         View estimate = mRootView.findViewById(R.id.ll_estimate);
         View collect = mRootView.findViewById(R.id.rl_collection_time);
+        View send = mRootView.findViewById(R.id.order_operations);
         estimate.setVisibility(View.GONE);
         collect.setVisibility(View.VISIBLE);
+        send.setVisibility(View.VISIBLE);
     }
 
     private RelativeLayout genItemLayout(String name, String quantity) {
@@ -173,53 +181,63 @@ public class FragmentOrder extends android.support.v4.app.Fragment implements Vi
 
     @Override
     public void onClick(View view) {
-        for (int i=0;i<4;i++) {
-            if (mEstimeViewlist[i] == view) {
-                String waitingtime = OrderManager.getInstance().getEstimateString(i);
-                final int index = i;
-                if (waitingtime != null && !mInSetWaitingTime) {
-                    SetWaitingTimeRequest req = new SetWaitingTimeRequest(getActivity(), waitingtime, mOrder.getId(), new JsonObjectRequestCallback() {
-                        @Override
-                        public void onRequestSuccess(JSONObject value) {
-                            mOrder.setEstimateTime(index);
-                            updateOrderStatus();
-                            Intent intent = new Intent(Constants.ACTION_ORDER_CONFIRMED);
-                            intent.putExtra("orderid", mOrder.getId());
-                            getActivity().sendBroadcast(intent);
-                            mInSetWaitingTime = false;
-                        }
 
-                        @Override
-                        public void onRequestFailed(String errorMessage) {
-                            Logger.e(TAG, errorMessage);
+        if (view == mTvSend){
+            Log.d(getActivity().getLocalClassName(),"Have clicked");
+            Intent intent = new Intent(Constants.ACTION_DISPLAY_QUEUE);
+            intent.putExtra("order", mOrder);
+            getActivity().sendBroadcast(intent);
+            getActivity().finish();
 
-                            if (errorMessage == null) {
-                                /*
-                                 * We don't know what to do with this!
-                                 */
-                            }
-                            //check if this order is confrimed already
-                            else  if (errorMessage.contains("has already been processed before")) {
-                                Toast.makeText(getActivity(), "Order has been processed", Toast.LENGTH_SHORT).show();
-                                mOrder.setEstimateTime(0);
+        }else {
+            for (int i=0;i<4;i++) {
+                if (mEstimeViewlist[i] == view) {
+                    String waitingtime = OrderManager.getInstance().getEstimateString(i);
+                    final int index = i;
+                    if (waitingtime != null && !mInSetWaitingTime) {
+                        SetWaitingTimeRequest req = new SetWaitingTimeRequest(getActivity(), waitingtime, mOrder.getId(), new JsonObjectRequestCallback() {
+                            @Override
+                            public void onRequestSuccess(JSONObject value) {
+                                mOrder.setEstimateTime(index);
                                 updateOrderStatus();
                                 Intent intent = new Intent(Constants.ACTION_ORDER_CONFIRMED);
                                 intent.putExtra("orderid", mOrder.getId());
                                 getActivity().sendBroadcast(intent);
                                 mInSetWaitingTime = false;
-                            }else {
-                                Intent intent = new Intent(Constants.ACTION_ORDER_CONFIRM_ERROR);
-                                intent.putExtra("orderid", mOrder.getId());
-                                intent.putExtra("error_msg", errorMessage);
-                                getActivity().sendBroadcast(intent);
-                                mInSetWaitingTime = false;
                             }
-                        }
-                    });
-                    Volley.getInstance().addToRequestQueue(req);
-                    mInSetWaitingTime = true;
+
+                            @Override
+                            public void onRequestFailed(String errorMessage) {
+                                Logger.e(TAG, errorMessage);
+
+                                if (errorMessage == null) {
+                                /*
+                                 * We don't know what to do with this!
+                                 */
+                                }
+                                //check if this order is confrimed already
+                                else  if (errorMessage.contains("has already been processed before")) {
+                                    Toast.makeText(getActivity(), "Order has been processed", Toast.LENGTH_SHORT).show();
+                                    mOrder.setEstimateTime(0);
+                                    updateOrderStatus();
+                                    Intent intent = new Intent(Constants.ACTION_ORDER_CONFIRMED);
+                                    intent.putExtra("orderid", mOrder.getId());
+                                    getActivity().sendBroadcast(intent);
+                                    mInSetWaitingTime = false;
+                                }else {
+                                    Intent intent = new Intent(Constants.ACTION_ORDER_CONFIRM_ERROR);
+                                    intent.putExtra("orderid", mOrder.getId());
+                                    intent.putExtra("error_msg", errorMessage);
+                                    getActivity().sendBroadcast(intent);
+                                    mInSetWaitingTime = false;
+                                }
+                            }
+                        });
+                        Volley.getInstance().addToRequestQueue(req);
+                        mInSetWaitingTime = true;
+                    }
+                    break;
                 }
-                break;
             }
         }
     }

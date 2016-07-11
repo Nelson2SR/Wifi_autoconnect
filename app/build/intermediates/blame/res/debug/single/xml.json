@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\xml\\caption_preference.xml",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\exploded-aar\\com.google.android.libraries.cast.companionlibrary\\ccl\\2.8.3\\res\\xml\\caption_preference.xml"
+    },
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\xml\\queue_num_keyboard.xml",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\src\\main\\res\\xml\\queue_num_keyboard.xml"
+    },
+    {
+        "merged": "E:\\Merchant\\FastTrack-Merchant\\app\\build\\intermediates\\res\\merged\\debug\\xml\\keyboard.xml",
+        "source": "E:\\Merchant\\FastTrack-Merchant\\app\\src\\main\\res\\xml\\keyboard.xml"
+    }
+]
